@@ -1,0 +1,23 @@
+deepspeed --include localhost:2,3,4,5,7 src/train.py \
+    --deepspeed TrainQwen/examples/deepspeed/ds_z3_config.json \
+    --stage sft \
+    --do_train \
+    --model_name_or_path /mnt/nas_new/plms/Qwen2-7B-Instruct/qwen/Qwen2-7B-Instruct \
+    --dataset step3_train \
+    --template qwen \
+    --finetuning_type full \
+    --output_dir /mnt/nas_new/plms/llm4/ \
+    --overwrite_cache \
+    --per_device_train_batch_size 8 \
+    --gradient_accumulation_steps 2 \
+    --lr_scheduler_type cosine \
+    --cutoff_len 3000 \
+    --logging_steps 10 \
+    --save_steps 500 \
+    --learning_rate 3e-5 \
+    --num_train_epochs 5.0 \
+    --plot_loss True \
+    --bf16 True \
+    --warmup_ratio 0.1 \
+    --val_size 0.0 \
+    --overwrite_output_dir True
